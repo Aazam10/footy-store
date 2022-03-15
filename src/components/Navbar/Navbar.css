@@ -1,0 +1,74 @@
+.ecommerce-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 1.5rem 0;
+  color: var(--white-color);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.ecomm-logo-link {
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 0.5rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  width: 25%;
+  background-color: var(--white-color);
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.search-container .fa {
+  color: var(--primary-color);
+}
+.search-container .fa:hover {
+  cursor: pointer;
+}
+.search-bar {
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+.search-bar::placeholder {
+  font-weight: 600;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.badge-wrapper .fa {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.btn-login {
+  background-color: white;
+  color: var(--primary-color);
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+}
+
+.btn-login:hover,
+.badge-wrapper:hover {
+  opacity: 0.7;
+}
+
+.input-group .input-label {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+  .search-container {
+    display: none;
+  }
+}
