@@ -45,8 +45,6 @@ const Home = () => {
           />
         </div>
       </div>
-
-      {/* <!-- TRENDING --> */}
     </main>
   );
 };
