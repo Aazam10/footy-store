@@ -48,6 +48,7 @@
 .hero-link {
   color: var(--white-color);
   font-size: 1.2rem;
+  align-self: flex-start;
 }
 
 /* featured */
