@@ -1,9 +1,22 @@
 import "./App.css";
 import logo from "./logo.png";
 import Mockman from "mockman-js";
-
+import { Routes, Route } from "react-router-dom";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Home, ProductListing } from "./pages/index";
 function App() {
-  return <Mockman />;
+  return (
+    <div className="App">
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/products" element={<ProductListing />}></Route>
+
+        <Route path="/mock" element={<Mockman />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
