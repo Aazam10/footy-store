@@ -3,11 +3,10 @@ import "./ProductListing.css";
 import { ProductCard } from "./components/ProductCard";
 import { chelseaTee } from "../../assets";
 
-import { useData } from "../../context/data/dataContext";
+import { useProduct } from "../../context/data/ProductContext";
 
 const ProductListing = () => {
-  const { products: data } = useData();
-  console.log(data);
+  const { products } = useProduct();
 
   return (
     <div>
@@ -104,9 +103,10 @@ const ProductListing = () => {
             <p className="product-list-subtitle">(Showing All Products)</p>
           </div>
           <div className="product-card-grid">
-            {data.map((product) => {
+            {products.map((product) => {
               return (
                 <ProductCard
+                  key={product._id}
                   productImg={product.image}
                   productAlt={"item"}
                   productTitle={product.title}
