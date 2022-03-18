@@ -4,19 +4,30 @@ import { ProductCard } from "./components/ProductCard";
 import { chelseaTee } from "../../assets";
 
 import { useProduct } from "../../context/data/ProductContext";
+import { Filters } from "./components/Filters";
+
+import { useFilter } from "../../context/data/FilterContext";
+import { sortData } from "../../utils/sortData";
+import { priceFilter } from "../../utils/priceFilter";
 
 const ProductListing = () => {
   const { products } = useProduct();
 
+  const { state } = useFilter();
+
+  const priceFiltered = priceFilter(products, state);
+
+  const sortedData = sortData(priceFiltered, state);
+
   return (
     <div>
       <main className="product-main-container">
-        <aside className="product-filter-container">
-          <div className="filter-header">
+        <Filters />
+        {/* <div className="filter-header">
             <h3 className="filter-title">Filter</h3>
             <p className="filter-reset">Clear</p>
-          </div>
-          <div className="price-range-container">
+          </div> */}
+        {/* <div className="price-range-container">
             <h3 className="price-title">Price</h3>
             <div className="slider-container">
               <div className="price-range">
@@ -32,8 +43,8 @@ const ProductListing = () => {
                 max="5000"
               />
             </div>
-          </div>
-          <div className="category-container">
+          </div> */}
+        {/* <div className="category-container">
             <h3 className="category-title">Category</h3>
             <div className="checkbox">
               <label for="checkbox-1">
@@ -53,8 +64,8 @@ const ProductListing = () => {
                 Bottomwear
               </label>
             </div>
-          </div>
-          <div className="rating-container">
+          </div> */}
+        {/* <div className="rating-container">
             <h3 className="rating-title">Ratings</h3>
             <div className="radio">
               <label for="four-star">
@@ -80,8 +91,8 @@ const ProductListing = () => {
                 Above
               </label>
             </div>
-          </div>
-          <div className="sortby-container">
+          </div> */}
+        {/* <div className="sortby-container">
             <h3 className="sortby-title">Sort By</h3>
             <div className="radio">
               <label for="high-to-low">
@@ -95,15 +106,15 @@ const ProductListing = () => {
                 Price- Low to High
               </label>
             </div>
-          </div>
-        </aside>
+          </div> */}
+
         <section className="product-list-container">
           <div className="product-list-title-container">
             <h2 className="product-list-title">Showing All Products</h2>
             <p className="product-list-subtitle">(Showing All Products)</p>
           </div>
           <div className="product-card-grid">
-            {products.map((product) => {
+            {sortedData.map((product) => {
               return (
                 <ProductCard
                   key={product._id}
