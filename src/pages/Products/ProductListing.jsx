@@ -9,13 +9,14 @@ import { Filters } from "./components/Filters";
 import { useFilter } from "../../context/data/FilterContext";
 import { sortData } from "../../utils/sortData";
 import { priceFilter } from "../../utils/priceFilter";
+import { categoryFilter } from "../../utils/categoryFilter";
 
 const ProductListing = () => {
   const { products } = useProduct();
 
   const { state } = useFilter();
-
-  const priceFiltered = priceFilter(products, state);
+  const categoryFilteredData = categoryFilter(products, state);
+  const priceFiltered = priceFilter(categoryFilteredData, state);
 
   const sortedData = sortData(priceFiltered, state);
 
@@ -114,21 +115,25 @@ const ProductListing = () => {
             <p className="product-list-subtitle">(Showing All Products)</p>
           </div>
           <div className="product-card-grid">
-            {sortedData.map((product) => {
-              return (
-                <ProductCard
-                  key={product._id}
-                  productImg={product.image}
-                  productAlt={"item"}
-                  productTitle={product.title}
-                  productSubTitle={product.subtitle}
-                  originalPrice={product.OriginalPrice}
-                  discountPercentage={product.discountPercentage}
-                  discountedPrice={product.discountedPrice}
-                  categoryName={"product.categoryName"}
-                />
-              );
-            })}
+            {sortedData.length <= 0 ? (
+              <p>No Products Available</p>
+            ) : (
+              sortedData.map((product) => {
+                return (
+                  <ProductCard
+                    key={product._id}
+                    productImg={product.image}
+                    productAlt={"item"}
+                    productTitle={product.title}
+                    productSubTitle={product.subtitle}
+                    originalPrice={product.OriginalPrice}
+                    discountPercentage={product.discountPercentage}
+                    discountedPrice={product.discountedPrice}
+                    categoryName={"product.categoryName"}
+                  />
+                );
+              })
+            )}
           </div>
         </section>
       </main>

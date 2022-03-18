@@ -21,7 +21,6 @@ export const products = [
     discountedPrice: 750,
     discountPercentage: "25%",
     image: nikeImage2,
-
     categoryName: "Football Shoes",
   },
   {

@@ -10,7 +10,6 @@ const RangePriceFilter = () => {
       <div className="slider-container">
         <div className="price-range">
           <p>0</p>
-          <p>2500</p>
           <p>5000</p>
         </div>
         <input
