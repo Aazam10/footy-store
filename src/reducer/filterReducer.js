@@ -1,5 +1,3 @@
-import React from "react";
-
 const filterReducer = (state, action) => {
   switch (action.type) {
     case "SORT":
@@ -16,6 +14,17 @@ const filterReducer = (state, action) => {
       return { ...state, vapor: action.payload };
     case "RATING":
       return { ...state, ratings: action.payload };
+    case "CLEAR":
+      return {
+        ...state,
+        sortBy: "",
+        rangeValue: 5000,
+        jordans: false,
+        vapor: false,
+        footballShoes: false,
+        clubMerch: false,
+        ratings: "",
+      };
 
     default:
       return state;
