@@ -150,6 +150,11 @@ div > h3 {
 .ecom-card-price {
   justify-content: center;
 }
+
+.sortby-title,
+.price-title {
+  text-align: left;
+}
 @media screen and (max-width: 800px) {
   .product-filter-container {
     display: none;
