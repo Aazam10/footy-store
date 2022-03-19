@@ -41,7 +41,7 @@ const ProductListing = () => {
                     productAlt={"item"}
                     productTitle={product.title}
                     productSubTitle={product.subtitle}
-                    originalPrice={product.OriginalPrice}
+                    originalPrice={product.originalPrice}
                     discountPercentage={product.discountPercentage}
                     discountedPrice={product.discountedPrice}
                     categoryName={"product.categoryName"}
