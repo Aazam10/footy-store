@@ -26,7 +26,7 @@ const categoryFilter = (data, state) => {
     );
     catergoryFilterdArray.push(...newData);
   }
-  console.log(catergoryFilterdArray);
+
   return catergoryFilterdArray;
 };
 export { categoryFilter };

@@ -10,12 +10,14 @@ import { useFilter } from "../../context/data/FilterContext";
 import { sortData } from "../../utils/sortData";
 import { priceFilter } from "../../utils/priceFilter";
 import { categoryFilter } from "../../utils/categoryFilter";
+import { ratingFilter } from "../../utils/ratingFilter";
 
 const ProductListing = () => {
   const { products } = useProduct();
 
   const { state } = useFilter();
-  const categoryFilteredData = categoryFilter(products, state);
+  const ratingFilteredData = ratingFilter(products, state);
+  const categoryFilteredData = categoryFilter(ratingFilteredData, state);
   const priceFiltered = priceFilter(categoryFilteredData, state);
 
   const sortedData = sortData(priceFiltered, state);

@@ -14,6 +14,8 @@ const filterReducer = (state, action) => {
       return { ...state, clubMerch: action.payload };
     case "VAPOR":
       return { ...state, vapor: action.payload };
+    case "RATING":
+      return { ...state, ratings: action.payload };
 
     default:
       return state;

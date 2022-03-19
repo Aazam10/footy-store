@@ -11,6 +11,7 @@ const FilterProvider = ({ children }) => {
     vapor: false,
     footballShoes: false,
     clubMerch: false,
+    ratings: "",
   });
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

@@ -1,6 +1,7 @@
 import { SortPriceFilter } from "./Filters/SortPriceFilter";
 import { RangePriceFilter } from "./Filters/RangePriceFilter";
 import { CategoryFilter } from "./Filters/CategoryFilter";
+import { RatingFilter } from "./Filters/RatingFilter";
 
 const Filters = () => {
   return (
@@ -12,6 +13,7 @@ const Filters = () => {
       <SortPriceFilter />
       <RangePriceFilter />
       <CategoryFilter />
+      <RatingFilter />
     </aside>
   );
 };

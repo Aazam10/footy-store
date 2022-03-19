@@ -22,6 +22,7 @@ export const products = [
     discountPercentage: "25%",
     image: nikeImage2,
     categoryName: "Football Shoes",
+    ratings: 2.5,
   },
   {
     _id: uuid(),
@@ -33,6 +34,7 @@ export const products = [
     image: chelseaTee,
     price: "5000",
     categoryName: "Club Merch",
+    ratings: 3,
   },
   {
     _id: uuid(),
@@ -44,6 +46,7 @@ export const products = [
     image: preMatchTee,
     price: "5000",
     categoryName: "Club Merch",
+    ratings: 3.5,
   },
   {
     _id: uuid(),
@@ -55,6 +58,7 @@ export const products = [
     image: jordans,
     price: "5000",
     categoryName: "jordans",
+    ratings: 5,
   },
   {
     _id: uuid(),
@@ -66,5 +70,6 @@ export const products = [
     image: vaporBlack,
     price: "5000",
     categoryName: "vapor",
+    ratings: 0.5,
   },
 ];
