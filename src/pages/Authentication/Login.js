@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   const { authDispatch } = useAuth();
-  const passwordFieldChangeHandler = (event) => {
+  const loginFieldChangeHandler = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
@@ -74,7 +74,7 @@ const Login = () => {
               className="input"
               value={user.email}
               required
-              onChange={passwordFieldChangeHandler}
+              onChange={loginFieldChangeHandler}
             />
           </div>
           <div className="input-group">
@@ -89,7 +89,7 @@ const Login = () => {
               value={user.password}
               name="password"
               required
-              onChange={passwordFieldChangeHandler}
+              onChange={loginFieldChangeHandler}
             />
           </div>
           <div className="box-link-wrapper">
