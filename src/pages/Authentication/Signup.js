@@ -48,7 +48,7 @@ const Signup = () => {
             firstName: "",
             lastName: "",
           });
-          Navigate("/login");
+          Navigate("/");
         } else if (response.status === 422) {
           throw new Error("User already exists");
         } else if (response.status === 500) {
