@@ -21,32 +21,44 @@ const Signup = () => {
   };
   const signupFormSubmitHandler = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post("/api/auth/signup", user);
-      if (response.status === 201) {
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem("user", JSON.stringify(response.data.createdUser));
-        authDispatch({
-          type: "SIGNUP",
-          payload: {
-            user: response.data.createdUser,
-            token: response.data.encodedToken,
-          },
-        });
-        setUser({
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-        });
-        Navigate("/");
-      } else if (response.status === 422) {
-        throw new Error("User already exists");
-      } else if (response.status === 500) {
-        throw new Error("Server Error");
+    if (
+      user.firstName != "" &&
+      user.email != "" &&
+      user.password != "" &&
+      user.lastName != ""
+    ) {
+      try {
+        const response = await axios.post("/api/auth/signup", user);
+        if (response.status === 201) {
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem(
+            "user",
+            JSON.stringify(response.data.createdUser)
+          );
+          authDispatch({
+            type: "SIGNUP",
+            payload: {
+              user: response.data.createdUser,
+              token: response.data.encodedToken,
+            },
+          });
+          setUser({
+            email: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+          });
+          Navigate("/");
+        } else if (response.status === 422) {
+          throw new Error("User already exists");
+        } else if (response.status === 500) {
+          throw new Error("Server Error");
+        }
+      } catch (error) {
+        alert(error);
       }
-    } catch (error) {
-      alert(error);
+    } else {
+      alert("error! All input fields are manadatory");
     }
   };
 
@@ -66,7 +78,7 @@ const Signup = () => {
                 placeholder="first name"
                 className="input"
                 name="firstName"
-                required
+                required={true}
                 value={user.firstName}
                 onChange={signupInputChangeHandler}
               />
@@ -81,7 +93,7 @@ const Signup = () => {
                 placeholder="last name"
                 className="input"
                 name="lastName"
-                required
+                required={true}
                 value={user.lastName}
                 onChange={signupInputChangeHandler}
               />
@@ -96,7 +108,7 @@ const Signup = () => {
                 placeholder="test@gmail.com"
                 className="input"
                 name="email"
-                required
+                required={true}
                 value={user.email}
                 onChange={signupInputChangeHandler}
               />

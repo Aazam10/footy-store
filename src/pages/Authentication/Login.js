@@ -1,23 +1,73 @@
 import "./Authentication.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../../context/data/AuthContext";
+
 const Login = () => {
+  const Navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const { authDispatch } = useAuth();
+  const passwordFieldChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+  const loginFormSubmitHandler = async (event) => {
+    event.preventDefault();
+    if (user.email != "" && user.password != "") {
+      try {
+        const response = await axios.post("/api/auth/login", user);
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem("user", JSON.stringify(response.data.foundUser));
+          authDispatch({
+            type: "LOGIN",
+            payload: {
+              user: response.data.foundUser,
+              token: response.data.encodedToken,
+            },
+          });
+          Navigate("/");
+        } else if (response.status === 201) {
+          alert("wrong password");
+        } else if (response.status === 404) {
+          alert("Email not found");
+        } else if (response.status === 500) {
+          alert("Server Failed");
+        }
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      alert("ALL INPUT FIELDS ARE MANDATORY");
+    }
+  };
   return (
     <div className="auth-container">
       <section className="auth-card">
         <h2 className="auth-title">Login</h2>
-        <div className="auth-main">
+        <form className="auth-main">
           <div className="input-group">
-            <label for="username" className="input-label">
+            <label htmlFor="email" className="input-label">
               Username
             </label>
             <input
               type="text"
-              id="username"
+              id="email"
+              name="email"
               placeholder="test@gmail.com"
               className="input"
+              value={user.email}
+              required
+              onChange={passwordFieldChangeHandler}
             />
           </div>
           <div className="input-group">
-            <label for="password" className="input-label">
+            <label htmlFor="password" className="input-label">
               Password
             </label>
             <input
@@ -25,27 +75,32 @@ const Login = () => {
               id="password"
               placeholder="*********"
               className="input"
+              value={user.password}
+              name="password"
+              required
+              onChange={passwordFieldChangeHandler}
             />
           </div>
           <div className="box-link-wrapper">
             <div className="checkbox">
               <input id="remember-me" name="remember-me" type="checkbox" />
-              <label for="remember-me">Remember-me</label>
+              <label htmlFor="remember-me">Remember-me</label>
             </div>
 
             <div className="forgot-link">
               <a href="#">Forgot Your Password?</a>
             </div>
           </div>
-          <button className="btn btn-primary auth-btn">
-            <a href="#">Login</a>
+          <button
+            className="btn btn-primary auth-btn"
+            onClick={loginFormSubmitHandler}
+          >
+            Login
           </button>
           <div className="auth-link-wrapper">
-            <a href="../signup/signup.html" className="create-link">
-              Create New Account
-            </a>
+            <Link to="/signup">Create New Account</Link>
           </div>
-        </div>
+        </form>
       </section>
     </div>
   );

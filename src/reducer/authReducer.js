@@ -13,6 +13,13 @@ const authReducer = (state, action) => {
         user: action.payload.user,
         token: action.payload.token,
       };
+
+    case "LOGIN":
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+      };
   }
 };
 
