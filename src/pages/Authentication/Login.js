@@ -11,6 +11,17 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const guestUser = {
+    email: "aazam.hudda@gmail.com",
+    password: "aazam123",
+  };
+
+  const guestCredentialClickHandler = (event) => {
+    event.preventDefault();
+    setUser({ email: guestUser.email, password: guestUser.password });
+  };
+
   const { authDispatch } = useAuth();
   const passwordFieldChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -96,6 +107,12 @@ const Login = () => {
             onClick={loginFormSubmitHandler}
           >
             Login
+          </button>
+          <button
+            className="btn btn-primary guest-btn"
+            onClick={guestCredentialClickHandler}
+          >
+            Guest Credentials
           </button>
           <div className="auth-link-wrapper">
             <Link to="/signup">Create New Account</Link>

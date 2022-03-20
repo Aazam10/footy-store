@@ -48,7 +48,7 @@ const Signup = () => {
             firstName: "",
             lastName: "",
           });
-          Navigate("/");
+          Navigate("/login");
         } else if (response.status === 422) {
           throw new Error("User already exists");
         } else if (response.status === 500) {
@@ -143,9 +143,7 @@ const Signup = () => {
               Create New Account
             </button>
             <div className="auth-link-wrapper">
-              <a href="../login/login.html" className="create-link">
-                Already Have An Account
-              </a>
+              <Link to="/login">Already Have An Account</Link>
             </div>
           </div>
         </form>
