@@ -1,7 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../Navbar/Navbar.css";
+import { useAuth } from "../../context/data/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const { authState, authDispatch } = useAuth();
+  const Navigate = useNavigate();
+  const logoutHandler = () => {
+    Navigate("/login");
+    console.log("clicked");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    authDispatch({
+      type: "LOGOUT",
+      payload: {
+        user: "",
+        token: "",
+      },
+    });
+  };
   return (
     <header className="ecommerce-header">
       <div className="ecomm-logo">
@@ -20,9 +37,16 @@ const Navbar = () => {
         />
       </div>
       <nav className="navigation">
-        <Link to="/login">
-          <button className="btn btn-login">Login</button>
-        </Link>
+        {!authState.token ? (
+          <Link to="/login">
+            <button className="btn btn-login">Login</button>
+          </Link>
+        ) : (
+          <button onClick={logoutHandler} className="btn btn-login">
+            Logout
+          </button>
+        )}
+
         <Link to="/wishilist">
           <div className="badge-wrapper">
             <i className="fa fa-heart-o"></i>
