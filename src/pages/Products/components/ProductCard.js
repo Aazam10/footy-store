@@ -1,6 +1,7 @@
 import React from "react";
 
 const ProductCard = ({
+  productId,
   productImg,
   productAlt,
   productTitle,
