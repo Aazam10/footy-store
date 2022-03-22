@@ -1,12 +1,15 @@
 import { chelseaTee } from "../../../assets";
 
 const CartCard = ({
+  cardId,
   cardImg,
   cardAlt,
   cardTitle,
   cardDiscountedPrice,
   cardOriginalPrice,
   cardDiscountedPercentage,
+  cardQuantity,
+  updateCartItemClickHandler,
 }) => {
   return (
     <section className="card-header cart-card-horizontal card-horizontal">
@@ -24,14 +27,29 @@ const CartCard = ({
           </p>
         </div>
         <div className="cart-discount-percentage gray-text">
-          {cardDiscountedPercentage}% off
+          {cardDiscountedPercentage} off
         </div>
         <div className="cart-product-quantity">
           <p>Quantity:</p>
           <div className="product-quantity-btn">
-            <button className="minus">-</button>
-            <p className="quantity">1</p>
-            <button className="plus">+</button>
+            {cardQuantity > 1 ? (
+              <button
+                className="minus"
+                onClick={() => updateCartItemClickHandler(cardId, "decrement")}
+              >
+                -
+              </button>
+            ) : (
+              <p>delete</p>
+            )}
+
+            <p className="quantity">{cardQuantity}</p>
+            <button
+              className="plus"
+              onClick={() => updateCartItemClickHandler(cardId, "increment")}
+            >
+              +
+            </button>
           </div>
         </div>
         <div className="button-action-wrapper">
