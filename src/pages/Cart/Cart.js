@@ -1,5 +1,4 @@
 import "./Cart.css";
-import { chelseaTee } from "../../assets";
 import { CartCard } from "./components/CartCard";
 import { CartBill } from "./components/CartBill";
 import { useEffect } from "react";
@@ -7,6 +6,7 @@ import axios from "axios";
 
 import { useAuth } from "../../context/data/AuthContext";
 import { useCart } from "../../context/data/CartContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { authState } = useAuth();
@@ -24,7 +24,22 @@ const Cart = () => {
   //   })();
   // }, []);
 
-  console.log(cart);
+  const removeFromCartService = (id, token) => {
+    return axios.delete(`/api/user/cart/${id}`, {
+      headers: { authorization: token },
+    });
+  };
+
+  const removeFromCart = async (id, token) => {
+    const response = await removeFromCartService(id, token);
+    cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart });
+  };
+
+  const removeFromCartHandler = (id) => {
+    removeFromCart(id, token);
+  };
+
+  console.log(cart, token);
   const updateCartService = (id, type, token) => {
     return axios.post(
       `/api/user/cart/${id}`,
@@ -42,13 +57,29 @@ const Cart = () => {
     updateCartItem(id, type, token);
   };
 
+  const getCartBill = (cart) => {
+    const cartDetails = cart.reduce(
+      (details, cartItem) => {
+        return {
+          ...details,
+          qty: details.qty + cartItem.qty,
+          totalAmount:
+            details.totalAmount + cartItem.qty * cartItem.discountedPrice,
+        };
+      },
+      { qty: 0, totalAmount: 0 }
+    );
+    return cartDetails;
+  };
+
+  console.log(getCartBill(cart));
+
   return (
     <div>
       <h2 className="cart-title-main">My CART</h2>
-
-      <main className="cart-wrapper">
-        {cart.length > 0 ? (
-          cart.map((cartItem) => {
+      {cart.length > 0 ? (
+        <main className="cart-wrapper">
+          {cart.map((cartItem) => {
             return (
               <CartCard
                 key={cartItem._id}
@@ -61,15 +92,23 @@ const Cart = () => {
                 cardDiscountedPercentage={cartItem.discountPercentage}
                 cardQuantity={cartItem.qty}
                 updateCartItemClickHandler={updateCartItemClickHandler}
+                removeFromCartHandler={removeFromCartHandler}
               />
             );
-          })
-        ) : (
-          <p>"No Products in cart continue shopping"</p>
-        )}
+          })}
 
-        <CartBill />
-      </main>
+          <CartBill />
+        </main>
+      ) : (
+        <div className="card-no-products">
+          <h2>No Products in cart continue shopping</h2>
+          <Link to="/products">
+            <button className="btn btn-primary btn-shop">
+              Continue Shopping
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

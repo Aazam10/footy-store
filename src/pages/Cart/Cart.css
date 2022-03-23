@@ -110,6 +110,25 @@
   width: 100%;
 }
 
+.cart-card-delete {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.card-no-products {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.btn-shop {
+  font-size: 1.5rem;
+  padding: 1.2rem;
+}
 /* Price Details card */
 
 .price-details {

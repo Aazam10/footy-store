@@ -10,6 +10,7 @@ const CartCard = ({
   cardDiscountedPercentage,
   cardQuantity,
   updateCartItemClickHandler,
+  removeFromCartHandler,
 }) => {
   return (
     <section className="card-header cart-card-horizontal card-horizontal">
@@ -40,7 +41,10 @@ const CartCard = ({
                 -
               </button>
             ) : (
-              <p>delete</p>
+              <i
+                className="fa fa-trash cart-card-delete"
+                onClick={() => removeFromCartHandler(cardId)}
+              ></i>
             )}
 
             <p className="quantity">{cardQuantity}</p>
@@ -53,7 +57,12 @@ const CartCard = ({
           </div>
         </div>
         <div className="button-action-wrapper">
-          <button className="btn cart-btn-remove">Remove from cart</button>
+          <button
+            className="btn cart-btn-remove"
+            onClick={() => removeFromCartHandler(cardId)}
+          >
+            Remove from cart
+          </button>
           <button className="btn btn-outline cart-btn-move">
             Move to Wishlist
           </button>
