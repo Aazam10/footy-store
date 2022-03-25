@@ -1,6 +1,5 @@
-import React from "react";
-
 const ProductCard = ({
+  productId,
   productImg,
   productAlt,
   productTitle,
@@ -9,6 +8,8 @@ const ProductCard = ({
   discountedPrice,
   categoryName,
   discountPercentage,
+  cardButtonActionText,
+  cardButtonAction,
 }) => {
   return (
     <div className="card card-shadow">
@@ -31,8 +32,11 @@ const ProductCard = ({
       </div>
       <div className="card-footer">
         <div className="card-button ecom-card-button">
-          <button className="btn btn-primary ecomm-btn align-center">
-            Add to Cart
+          <button
+            className="btn btn-primary ecomm-btn align-center"
+            onClick={() => cardButtonAction(productId)}
+          >
+            {cardButtonActionText(productId)}
           </button>
         </div>
       </div>

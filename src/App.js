@@ -3,8 +3,9 @@ import logo from "./logo.png";
 import Mockman from "mockman-js";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar/Navbar";
-import { Home, ProductListing } from "./pages/index";
+import { Home, ProductListing, Cart } from "./pages/index";
 import { Login, Signup } from "./pages/Authentication/index";
+
 function App() {
   return (
     <div className="App">
@@ -15,7 +16,7 @@ function App() {
         <Route path="/products" element={<ProductListing />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
-
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/mock" element={<Mockman />}></Route>
       </Routes>
     </div>
