@@ -5,6 +5,7 @@ import { Filters } from "./components/Filters";
 import { useFilter } from "../../context/data/FilterContext";
 import { useCart } from "../../context/data/CartContext";
 import { useAuth } from "../../context/data/AuthContext";
+import { useWishlist } from "../../context/data/WishlistContext";
 import {
   sortData,
   ratingFilter,
@@ -23,6 +24,8 @@ const ProductListing = () => {
   const { cart } = cartState;
   const { token } = authState;
   const navigate = useNavigate();
+  // const { wishlistState, wishlistDispatch } = useWishlist();
+  // console.log(wishlistDispatch, wishlistState);
   // const cart = [{ id: 1, name: "shoes" }];
   // console.log(cart, token);
   //TO CHECK IF ITEM IS IN CART
@@ -30,6 +33,7 @@ const ProductListing = () => {
     const item = cart.find((cartItem) => cartItem._id === id);
     return item ? "Go To Cart" : "Add To Cart";
   };
+
   //FUNCTION INVOKED IF CTA IS ADD TO CART
 
   // const addToCart = async (product, token, cartDispatch) => {

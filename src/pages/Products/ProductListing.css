@@ -124,10 +124,18 @@ div > h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--background-color-heart);
+
   height: 40px;
   width: 40px;
   border-radius: 50%;
+}
+
+.card-wishlist {
+  color: var(--red-color);
+}
+
+.card-not-wishlist {
+  color: var(--background-color-heart);
 }
 
 .card {
@@ -135,9 +143,9 @@ div > h3 {
   border: none;
 }
 
-.card-badge-icon:hover {
+/* .card-badge-icon:hover {
   color: var(--red-color);
-}
+} */
 
 .filter-icon {
   display: flex;

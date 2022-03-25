@@ -59,7 +59,7 @@ const Navbar = () => {
           </button>
         )}
         {token ? (
-          <Link to="/wishilist">
+          <Link to="/wishlist">
             <div className="badge-wrapper">
               <i className="fa fa-heart-o"></i>
               <div className="badge-number">99+</div>
