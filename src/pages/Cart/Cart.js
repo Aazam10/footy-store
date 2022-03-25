@@ -3,10 +3,10 @@ import { CartCard } from "./components/CartCard";
 import { CartBill } from "./components/CartBill";
 import { useEffect } from "react";
 import axios from "axios";
-
 import { useAuth } from "../../context/data/AuthContext";
 import { useCart } from "../../context/data/CartContext";
 import { Link } from "react-router-dom";
+import { removeFromCart, updateCartItem, getCartBill } from "../../utils";
 
 const Cart = () => {
   const { authState } = useAuth();
@@ -19,60 +19,59 @@ const Cart = () => {
   //     const response = await axios.get("/api/user/cart", {
   //       headers: { authorization: token },
   //     });
-  //     console.log(response.data.cart);
-  //     console.log("cart loaded");
+  //     cartDispatch({ type: "GET_CART", payload: response.data.cart });
   //   })();
   // }, []);
 
-  const removeFromCartService = (id, token) => {
-    return axios.delete(`/api/user/cart/${id}`, {
-      headers: { authorization: token },
-    });
-  };
+  // const removeFromCartService = (id, token) => {
+  //   return axios.delete(`/api/user/cart/${id}`, {
+  //     headers: { authorization: token },
+  //   });
+  // };
 
-  const removeFromCart = async (id, token) => {
-    const response = await removeFromCartService(id, token);
-    cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart });
-  };
+  // const removeFromCart = async (id, token,cartDispatch) => {
+  //   const response = await removeFromCartService(id, token);
+  //   cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart });
+  // };
 
   const removeFromCartHandler = (id) => {
-    removeFromCart(id, token);
+    removeFromCart(id, token, cartDispatch);
   };
 
-  console.log(cart, token);
-  const updateCartService = (id, type, token) => {
-    return axios.post(
-      `/api/user/cart/${id}`,
-      { action: { type: type } },
-      { headers: { authorization: token } }
-    );
-  };
+  // console.log(cart, token);
+  // const updateCartService = (id, type, token) => {
+  //   return axios.post(
+  //     `/api/user/cart/${id}`,
+  //     { action: { type: type } },
+  //     { headers: { authorization: token } }
+  //   );
+  // };
 
-  const updateCartItem = async (id, type, token) => {
-    const response = await updateCartService(id, type, token);
-    cartDispatch({ type: "UPDATE_CART", payload: response.data.cart });
-  };
+  // const updateCartItem = async (id, type, token,cartDispatch) => {
+  //   const response = await updateCartService(id, type, token);
+  //   cartDispatch({ type: "UPDATE_CART", payload: response.data.cart });
+  // };
 
   const updateCartItemClickHandler = (id, type) => {
-    updateCartItem(id, type, token);
+    updateCartItem(id, type, token, cartDispatch);
   };
 
-  const getCartBill = (cart) => {
-    const cartDetails = cart.reduce(
-      (details, cartItem) => {
-        return {
-          ...details,
-          qty: details.qty + cartItem.qty,
-          totalAmount:
-            details.totalAmount + cartItem.qty * cartItem.discountedPrice,
-        };
-      },
-      { qty: 0, totalAmount: 0 }
-    );
-    return cartDetails;
-  };
+  // const getCartBill = (cart) => {
+  //   const cartDetails = cart.reduce(
+  //     (details, cartItem) => {
+  //       return {
+  //         ...details,
+  //         qty: details.qty + cartItem.qty,
+  //         totalAmount:
+  //           details.totalAmount + cartItem.qty * cartItem.discountedPrice,
+  //       };
+  //     },
+  //     { qty: 0, totalAmount: 0 }
+  //   );
+  //   return cartDetails;
+  // };
 
-  console.log(getCartBill(cart));
+  const { qty, totalAmount } = getCartBill(cart);
 
   return (
     <div>
@@ -97,7 +96,7 @@ const Cart = () => {
             );
           })}
 
-          <CartBill />
+          <CartBill quantity={qty} totalPrice={totalAmount} />
         </main>
       ) : (
         <div className="card-no-products">

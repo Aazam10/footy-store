@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/data/AuthContext";
+import { getCartItem } from "../../utils/getCartItem";
+import { useCart } from "../../context/data/CartContext";
 
 const Login = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+  const { cartDispatch } = useCart();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -42,7 +45,8 @@ const Login = () => {
               token: response.data.encodedToken,
             },
           });
-          Navigate("/");
+          getCartItem(response.data.encodedToken, cartDispatch);
+          navigate("/");
         } else if (response.status === 201) {
           alert("wrong password");
         } else if (response.status === 404) {

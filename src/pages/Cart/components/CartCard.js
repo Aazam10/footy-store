@@ -1,5 +1,3 @@
-import { chelseaTee } from "../../../assets";
-
 const CartCard = ({
   cardId,
   cardImg,

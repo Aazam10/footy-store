@@ -16,13 +16,13 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ProductProvider>
-          <CartProvider>
+        <CartProvider>
+          <ProductProvider>
             <FilterProvider>
               <App />
             </FilterProvider>
-          </CartProvider>
-        </ProductProvider>
+          </ProductProvider>
+        </CartProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,

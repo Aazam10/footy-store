@@ -10,8 +10,11 @@ import {
   ratingFilter,
   categoryFilter,
   priceFilter,
+  addToCart,
 } from "../../utils";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { addToCartService } from "../../services/addToCartService";
 
 const ProductListing = () => {
   const { products } = useProduct();
@@ -19,35 +22,45 @@ const ProductListing = () => {
   const { authState } = useAuth();
   const { cart } = cartState;
   const { token } = authState;
+  const navigate = useNavigate();
   // const cart = [{ id: 1, name: "shoes" }];
-  console.log(cart, token);
+  // console.log(cart, token);
   //TO CHECK IF ITEM IS IN CART
   const productCardButtonAction = (id) => {
     const item = cart.find((cartItem) => cartItem._id === id);
     return item ? "Go To Cart" : "Add To Cart";
   };
   //FUNCTION INVOKED IF CTA IS ADD TO CART
+
+  // const addToCart = async (product, token, cartDispatch) => {
+  //   const response = await addToCartService(product, token);
+  //   // console.log(product, token, response);
+  //   cartDispatch({ type: "ADD_TO_CART", payload: response.data.cart });
+  // };
+
   const addToCartHandler = (id) => {
     const product = products.find((product) => product._id === id);
-    addToCartService(product, token);
+    // console.log(product, token, cartDispatch);
+    addToCart(product, token, cartDispatch);
+    // addToCartService(product, token);
   };
 
-  const addToCartService = async (product, token) => {
-    const response = await axios.post(
-      "/api/user/cart",
-      { product },
-      { headers: { authorization: token } }
-    );
-    cartDispatch({ type: "ADD_TO_CART", payload: response.data.cart });
-  };
+  // const addToCartService = (product, token) => {
+  //   return axios.post(
+  //     "/api/user/cart",
+  //     { product },
+  //     { headers: { authorization: token } }
+  //   );
+  //   // cartDispatch({ type: "ADD_TO_CART", payload: response.data.cart });
+  // };
   // FUNCTION TO CHECK WHAT CTA IS PRESENT AND TAKE ACTION ACCORDINGLY
   const cardButtonAction = (id) => {
     if (token) {
       productCardButtonAction(id) === "Add To Cart"
         ? addToCartHandler(id)
-        : console.log("go to cart");
+        : navigate("/cart");
     } else {
-      console.log("please login");
+      navigate("/login");
     }
   };
 
