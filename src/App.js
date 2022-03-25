@@ -17,7 +17,6 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-
         <Route path="/mock" element={<Mockman />}></Route>
       </Routes>
     </div>
