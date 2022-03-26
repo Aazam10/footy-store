@@ -9,6 +9,7 @@ const CartCard = ({
   cardQuantity,
   updateCartItemClickHandler,
   removeFromCartHandler,
+  moveToWishlistHandler,
 }) => {
   return (
     <section className="card-header cart-card-horizontal card-horizontal">
@@ -61,7 +62,10 @@ const CartCard = ({
           >
             Remove from cart
           </button>
-          <button className="btn btn-outline cart-btn-move">
+          <button
+            className="btn btn-outline cart-btn-move"
+            onClick={() => moveToWishlistHandler(cardId)}
+          >
             Move to Wishlist
           </button>
         </div>

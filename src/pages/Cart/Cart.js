@@ -5,7 +5,10 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/data/AuthContext";
 import { useCart } from "../../context/data/CartContext";
+import { useWishlist } from "../../context/data/WishlistContext";
+import { useProduct } from "../../context/data/ProductContext";
 import { Link } from "react-router-dom";
+import { addToWishlist } from "../../utils/addToWishlist";
 import { removeFromCart, updateCartItem, getCartBill } from "../../utils";
 
 const Cart = () => {
@@ -13,7 +16,9 @@ const Cart = () => {
   const { token } = authState;
   const { cartState, cartDispatch } = useCart();
   const { cart } = cartState;
-
+  const { wishlistState, wishlistDispatch } = useWishlist();
+  const { wishlist } = wishlistState;
+  const { products } = useProduct();
   // useEffect(() => {
   //   (async function () {
   //     const response = await axios.get("/api/user/cart", {
@@ -33,6 +38,14 @@ const Cart = () => {
   //   const response = await removeFromCartService(id, token);
   //   cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart });
   // };
+  const moveToWishlistHandler = (id) => {
+    const item = wishlist.find((product) => product._id === id);
+    if (!item) {
+      const product = products.find((product) => product._id === id);
+      addToWishlist(product, token, wishlistDispatch);
+    }
+    removeFromCart(id, token, cartDispatch);
+  };
 
   const removeFromCartHandler = (id) => {
     removeFromCart(id, token, cartDispatch);
@@ -92,6 +105,7 @@ const Cart = () => {
                 cardQuantity={cartItem.qty}
                 updateCartItemClickHandler={updateCartItemClickHandler}
                 removeFromCartHandler={removeFromCartHandler}
+                moveToWishlistHandler={moveToWishlistHandler}
               />
             );
           })}
