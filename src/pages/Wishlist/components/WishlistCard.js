@@ -1,7 +1,20 @@
-const WishlistCard = ({ wishlistImg }) => {
+const WishlistCard = ({
+  productId,
+  productImg,
+  productAlt,
+  productTitle,
+  productSubTitle,
+  originalPrice,
+  discountPercentage,
+  discountedPrice,
+  removeFromWishlistHandler,
+}) => {
   return (
     <div className=" card wishlist-card card-shadow">
-      <div className="card-badges">
+      <div
+        className="card-badges"
+        onClick={() => removeFromWishlistHandler(productId)}
+      >
         <i
           className="fa fa-heart card-badge-icon wishlist-card-badge-icon"
           aria-hidden="true"
@@ -10,20 +23,20 @@ const WishlistCard = ({ wishlistImg }) => {
       <div className="card-header">
         <img
           className="card-image wishlist-card-image"
-          src={wishlistImg}
-          alt="card-image"
+          src={productImg}
+          alt={productAlt}
         />
         <div className="card-header-text">
           <div className="card-title pd-side-05 margin-y-05">
-            Nike Mercurial Vapor 14 Club TF
+            {productTitle}
           </div>
-          <div className="card-subtitle pd-side-05">Turf Football Shoe</div>
+          <div className="card-subtitle pd-side-05">{productSubTitle}</div>
         </div>
       </div>
       <div className="wishlist-card-text pd-side-05 margin-y-05 ecom-card-price">
-        <p className="price">Rs. 5000</p>
-        <p className="text-strike gray-text">4995</p>
-        <p className="offer-text">19% off</p>
+        <p className="price">Rs. {discountedPrice}</p>
+        <p className="text-strike gray-text">{originalPrice}</p>
+        <p className="offer-text">{discountPercentage}% off</p>
       </div>
       <div className="card-footer">
         <div className="card-button ecom-card-button">
