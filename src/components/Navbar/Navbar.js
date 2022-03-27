@@ -13,7 +13,8 @@ const Navbar = () => {
     wishlistDispatch,
   } = useWishlist();
   const { cart } = cartState;
-  const { token } = authState;
+  const { user, token } = authState;
+
   const navigate = useNavigate();
 
   const cartIconClickHandler = () => {
@@ -57,6 +58,7 @@ const Navbar = () => {
           />
         </div>
         <nav className="navigation">
+          {token && <p className="user">{user.firstName}</p>}
           {!authState.token ? (
             <Link to="/login">
               <button className="btn btn-login">Login</button>

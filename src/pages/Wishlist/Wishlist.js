@@ -5,6 +5,7 @@ import { useAuth } from "../../context/data/AuthContext";
 import { useCart } from "../../context/data/CartContext";
 import { moveToCart, removeFromWishlist } from "../../utils";
 import { useProduct } from "../../context/data/ProductContext";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const { wishlistState, wishlistDispatch } = useWishlist();
@@ -28,26 +29,34 @@ const Wishlist = () => {
   return (
     <>
       <h2 className="wishlist-title">My Wishlist</h2>
-
-      <main className="wishlist-items-container">
-        {wishlist.map((product) => {
-          return (
-            <WishlistCard
-              key={product._id}
-              productId={product._id}
-              productImg={product.image}
-              productAlt={"item"}
-              productTitle={product.title}
-              productSubTitle={product.subtitle}
-              originalPrice={product.originalPrice}
-              discountPercentage={product.discountPercentage}
-              discountedPrice={product.discountedPrice}
-              removeFromWishlistHandler={removeFromWishlistHandler}
-              callMoveToCartHandler={callMoveToCartHandler}
-            />
-          );
-        })}
-      </main>
+      {wishlist.length > 0 ? (
+        <main className="wishlist-items-container">
+          {wishlist.map((product) => {
+            return (
+              <WishlistCard
+                key={product._id}
+                productId={product._id}
+                productImg={product.image}
+                productAlt={"item"}
+                productTitle={product.title}
+                productSubTitle={product.subtitle}
+                originalPrice={product.originalPrice}
+                discountPercentage={product.discountPercentage}
+                discountedPrice={product.discountedPrice}
+                removeFromWishlistHandler={removeFromWishlistHandler}
+                callMoveToCartHandler={callMoveToCartHandler}
+              />
+            );
+          })}
+        </main>
+      ) : (
+        <div className="card-no-products">
+          <h2>No Products in wishlist continue shopping</h2>
+          <Link to="/products">
+            <button className="btn btn-primary btn-shop">Go to Products</button>
+          </Link>
+        </div>
+      )}
     </>
   );
 };
