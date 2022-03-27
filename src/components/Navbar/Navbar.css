@@ -9,6 +9,12 @@
   flex-wrap: wrap;
 }
 
+.nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .ecomm-logo-link {
   font-size: 1.3rem;
   font-weight: 700;

@@ -40,46 +40,48 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <header className="ecommerce-header">
-      <div className="ecomm-logo">
-        <Link to="/">
-          <div className="ecomm-logo-link">Footy-Store</div>
-        </Link>
-      </div>
-      <div className="search-container">
-        <i className="fa fa-search" aria-hidden="true"></i>
-        <input
-          type="text"
-          name="search"
-          className="search-bar"
-          placeholder="Search for product"
-          id=""
-        />
-      </div>
-      <nav className="navigation">
-        {!authState.token ? (
-          <Link to="/login">
-            <button className="btn btn-login">Login</button>
+    <div class="nav-header">
+      <header className="ecommerce-header">
+        <div className="ecomm-logo">
+          <Link to="/">
+            <div className="ecomm-logo-link">Footy-Store</div>
           </Link>
-        ) : (
-          <button onClick={logoutHandler} className="btn btn-login">
-            Logout
-          </button>
-        )}
-        <div className="badge-wrapper" onClick={wishlistIconClickHandler}>
-          <i className="fa fa-heart-o"></i>
-          {wishlist.length != 0 ? (
-            <div className="badge-number">{wishlist.length}</div>
-          ) : null}
         </div>
-        <div className="badge-wrapper" onClick={cartIconClickHandler}>
-          <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-          {cart.length != 0 ? (
-            <div className="badge-number">{cart.length}</div>
-          ) : null}
+        <div className="search-container">
+          <i className="fa fa-search" aria-hidden="true"></i>
+          <input
+            type="text"
+            name="search"
+            className="search-bar"
+            placeholder="Search for product"
+            id=""
+          />
         </div>
-      </nav>
-    </header>
+        <nav className="navigation">
+          {!authState.token ? (
+            <Link to="/login">
+              <button className="btn btn-login">Login</button>
+            </Link>
+          ) : (
+            <button onClick={logoutHandler} className="btn btn-login">
+              Logout
+            </button>
+          )}
+          <div className="badge-wrapper" onClick={wishlistIconClickHandler}>
+            <i className="fa fa-heart-o"></i>
+            {wishlist.length != 0 ? (
+              <div className="badge-number">{wishlist.length}</div>
+            ) : null}
+          </div>
+          <div className="badge-wrapper" onClick={cartIconClickHandler}>
+            <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+            {cart.length != 0 ? (
+              <div className="badge-number">{cart.length}</div>
+            ) : null}
+          </div>
+        </nav>
+      </header>
+    </div>
   );
 };
 
