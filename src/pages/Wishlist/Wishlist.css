@@ -40,6 +40,10 @@
   margin-bottom: 1rem;
 }
 
+.badge-number {
+  font-size: 0.8rem;
+}
+
 @media screen and (max-width: 800px) {
   .wishlist-items-container {
     width: 90%;

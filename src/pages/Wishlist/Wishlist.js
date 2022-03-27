@@ -3,9 +3,7 @@ import { WishlistCard } from "./components/WishlistCard";
 import { useWishlist } from "../../context/data/WishlistContext";
 import { useAuth } from "../../context/data/AuthContext";
 import { useCart } from "../../context/data/CartContext";
-import { removeFromWishlist } from "../../utils/removeFromWishlist";
-import { updateCartItem } from "../../utils";
-import { addToCart } from "../../utils";
+import { moveToCart, removeFromWishlist } from "../../utils";
 import { useProduct } from "../../context/data/ProductContext";
 
 const Wishlist = () => {
@@ -16,22 +14,17 @@ const Wishlist = () => {
   const { token } = authState;
   const { cart } = cartState;
   const { products } = useProduct();
-  console.log(wishlist, token, cart, products);
 
   const removeFromWishlistHandler = (id) => {
     removeFromWishlist(id, token, wishlistDispatch);
   };
 
-  const moveToCartHandler = (id) => {
+  const callMoveToCartHandler = (id) => {
     const item = cart.find((product) => product._id === id);
-    if (item) {
-      updateCartItem(id, "increment", token, cartDispatch);
-    } else {
-      const product = products.find((product) => product._id === id);
-      addToCart(product, token, cartDispatch);
-    }
+    moveToCart(id, item, token, products, cartDispatch);
     removeFromWishlist(id, token, wishlistDispatch);
   };
+
   return (
     <>
       <h2 className="wishlist-title">My Wishlist</h2>
@@ -50,7 +43,7 @@ const Wishlist = () => {
               discountPercentage={product.discountPercentage}
               discountedPrice={product.discountedPrice}
               removeFromWishlistHandler={removeFromWishlistHandler}
-              moveToCartHandler={moveToCartHandler}
+              callMoveToCartHandler={callMoveToCartHandler}
             />
           );
         })}

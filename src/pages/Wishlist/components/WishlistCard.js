@@ -8,7 +8,7 @@ const WishlistCard = ({
   discountPercentage,
   discountedPrice,
   removeFromWishlistHandler,
-  moveToCartHandler,
+  callMoveToCartHandler,
 }) => {
   return (
     <div className=" card wishlist-card card-shadow">
@@ -43,7 +43,7 @@ const WishlistCard = ({
         <div className="card-button ecom-card-button">
           <button
             className="btn btn-primary ecomm-btn align-center"
-            onClick={() => moveToCartHandler(productId)}
+            onClick={() => callMoveToCartHandler(productId)}
           >
             Move to Cart
           </button>

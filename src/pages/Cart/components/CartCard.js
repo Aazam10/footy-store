@@ -9,7 +9,7 @@ const CartCard = ({
   cardQuantity,
   updateCartItemClickHandler,
   removeFromCartHandler,
-  moveToWishlistHandler,
+  callMoveToWishlistHandler,
 }) => {
   return (
     <section className="card-header cart-card-horizontal card-horizontal">
@@ -64,7 +64,7 @@ const CartCard = ({
           </button>
           <button
             className="btn btn-outline cart-btn-move"
-            onClick={() => moveToWishlistHandler(cardId)}
+            onClick={() => callMoveToWishlistHandler(cardId)}
           >
             Move to Wishlist
           </button>

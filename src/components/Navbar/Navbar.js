@@ -4,9 +4,15 @@ import "../Navbar/Navbar.css";
 import { useAuth } from "../../context/data/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/data/CartContext";
+import { useWishlist } from "../../context/data/WishlistContext";
 const Navbar = () => {
   const { authState, authDispatch } = useAuth();
   const { cartState, cartDispatch } = useCart();
+  const {
+    wishlistState: { wishlist },
+    wishlistDispatch,
+  } = useWishlist();
+  console.log(wishlist);
   const { cart } = cartState;
   const { token } = authState;
   const navigate = useNavigate();
@@ -14,10 +20,11 @@ const Navbar = () => {
   const cartIconClickHandler = () => {
     token ? navigate("/cart") : navigate("/login");
   };
+  const wishlistIconClickHandler = () => {
+    token ? navigate("/wishlist") : navigate("/login");
+  };
 
   const logoutHandler = () => {
-    // Navigate("/login");
-    // console.log("clicked");
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     authDispatch({
@@ -29,6 +36,7 @@ const Navbar = () => {
     });
 
     cartDispatch({ type: "EMPTY_CART" });
+    wishlistDispatch({ type: "EMPTY_WISHLIST" });
     navigate("/login");
   };
   return (
@@ -58,27 +66,12 @@ const Navbar = () => {
             Logout
           </button>
         )}
-        {token ? (
-          <Link to="/wishlist">
-            <div className="badge-wrapper">
-              <i className="fa fa-heart-o"></i>
-              <div className="badge-number">99+</div>
-            </div>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <div className="badge-wrapper">
-              <i className="fa fa-heart-o"></i>
-              <div className="badge-number">99+</div>
-            </div>
-          </Link>
-        )}
-        {/* <Link to="/wishilist">
-          <div className="badge-wrapper">
-            <i className="fa fa-heart-o"></i>
-            <div className="badge-number">99+</div>
-          </div>
-        </Link> */}
+        <div className="badge-wrapper" onClick={wishlistIconClickHandler}>
+          <i className="fa fa-heart-o"></i>
+          {wishlist.length != 0 ? (
+            <div className="badge-number">{wishlist.length}</div>
+          ) : null}
+        </div>
         <div className="badge-wrapper" onClick={cartIconClickHandler}>
           <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           {cart.length != 0 ? (

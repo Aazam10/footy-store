@@ -1,11 +1,9 @@
 import { useWishlist } from "../../../context/data/WishlistContext";
 import { useState } from "react";
 import { useProduct } from "../../../context/data/ProductContext";
-import axios from "axios";
 import { useAuth } from "../../../context/data/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { addToWishlist } from "../../../utils/addToWishlist";
-import { removeFromWishlist } from "../../../utils/removeFromWishlist";
+import { removeFromWishlist, addToWishlist } from "../../../utils";
 const ProductCard = ({
   productId,
   productImg,
@@ -25,51 +23,22 @@ const ProductCard = ({
   const { wishlist } = wishlistState;
   const { token } = authState;
   const navigate = useNavigate();
-  // console.log(wishlistDispatch, wishlistState, productId);
+
   const checkInWishlist = (id) => {
     const item = wishlist.find((product) => product._id === id);
     return item ? true : false;
   };
-  console.log(token);
-  console.log(wishlist);
 
   const [isInWishList, setIsInWishlist] = useState(checkInWishlist(productId));
 
   const removeFromWishlistHandler = (id, setIsInWishlist) => {
     removeFromWishlist(id, token, wishlistDispatch);
-    // try {
-    //   const response = await axios.delete(`/api/user/wishlist/${id}`, {
-    //     headers: { authorization: token },
-    //   });
-    //   console.log(response);
-    //   wishlistDispatch({
-    //     type: "REMOVE_FROM_WISHLIST",
-    //     payload: response.data.wishlist,
-    //   });
-
-    // } catch (error) {
-    //   alert(error);
-    // }
     setIsInWishlist(false);
   };
 
   const addTowishListHandler = (id, setIsInWishlist) => {
     const product = products.find((item) => item._id === id);
-    // console.log(product);
     addToWishlist(product, token, wishlistDispatch);
-    // try {
-    //   const response = await axios.post(
-    //     "/api/user/wishlist",
-    //     { product },
-    //     { headers: { authorization: token } }
-    //   );
-    //   wishlistDispatch({
-    //     type: "ADD_TO_WISHLIST",
-    //     payload: response.data.wishlist,
-    //   });
-    // } catch (error) {
-    //   alert(error);
-    // }
     setIsInWishlist(true);
   };
 
@@ -80,8 +49,6 @@ const ProductCard = ({
       : addTowishListHandler(id, setIsInWishlist);
   };
 
-  console.log(isInWishList);
-  // console.log(checkInWishlist(productId));
   return (
     <div className="card card-shadow">
       <div
@@ -91,7 +58,6 @@ const ProductCard = ({
         }
       >
         <i
-          // className="fa fa-heart card-badge-icon card-not-wishlist "
           className={`fa fa-heart card-badge-icon ${
             isInWishList ? "card-wishlist" : "card-not-wishlist"
           }`}
