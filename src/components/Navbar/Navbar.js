@@ -12,7 +12,6 @@ const Navbar = () => {
     wishlistState: { wishlist },
     wishlistDispatch,
   } = useWishlist();
-  console.log(wishlist);
   const { cart } = cartState;
   const { token } = authState;
   const navigate = useNavigate();
@@ -40,7 +39,7 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <div class="nav-header">
+    <div className="nav-header">
       <header className="ecommerce-header">
         <div className="ecomm-logo">
           <Link to="/">

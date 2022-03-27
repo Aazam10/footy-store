@@ -43,7 +43,6 @@ const ProductCard = ({
   };
 
   const wishListRoutHandler = (id) => {
-    console.log(checkInWishlist(id));
     return checkInWishlist(id)
       ? removeFromWishlistHandler(id, setIsInWishlist)
       : addTowishListHandler(id, setIsInWishlist);
