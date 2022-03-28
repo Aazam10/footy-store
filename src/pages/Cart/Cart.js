@@ -1,75 +1,40 @@
 import "./Cart.css";
 import { CartCard } from "./components/CartCard";
 import { CartBill } from "./components/CartBill";
-import { useEffect } from "react";
-import axios from "axios";
 import { useAuth } from "../../context/data/AuthContext";
 import { useCart } from "../../context/data/CartContext";
+import { useWishlist } from "../../context/data/WishlistContext";
+import { useProduct } from "../../context/data/ProductContext";
 import { Link } from "react-router-dom";
-import { removeFromCart, updateCartItem, getCartBill } from "../../utils";
+import {
+  removeFromCart,
+  updateCartItem,
+  getCartBill,
+  moveToWishlist,
+} from "../../utils";
 
 const Cart = () => {
   const { authState } = useAuth();
   const { token } = authState;
   const { cartState, cartDispatch } = useCart();
   const { cart } = cartState;
+  const { wishlistState, wishlistDispatch } = useWishlist();
+  const { wishlist } = wishlistState;
+  const { products } = useProduct();
 
-  // useEffect(() => {
-  //   (async function () {
-  //     const response = await axios.get("/api/user/cart", {
-  //       headers: { authorization: token },
-  //     });
-  //     cartDispatch({ type: "GET_CART", payload: response.data.cart });
-  //   })();
-  // }, []);
-
-  // const removeFromCartService = (id, token) => {
-  //   return axios.delete(`/api/user/cart/${id}`, {
-  //     headers: { authorization: token },
-  //   });
-  // };
-
-  // const removeFromCart = async (id, token,cartDispatch) => {
-  //   const response = await removeFromCartService(id, token);
-  //   cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart });
-  // };
+  const callMoveToWishlistHandler = (id) => {
+    const item = wishlist.find((product) => product._id === id);
+    moveToWishlist(id, item, products, token, wishlistDispatch);
+    removeFromCart(id, token, cartDispatch);
+  };
 
   const removeFromCartHandler = (id) => {
     removeFromCart(id, token, cartDispatch);
   };
 
-  // console.log(cart, token);
-  // const updateCartService = (id, type, token) => {
-  //   return axios.post(
-  //     `/api/user/cart/${id}`,
-  //     { action: { type: type } },
-  //     { headers: { authorization: token } }
-  //   );
-  // };
-
-  // const updateCartItem = async (id, type, token,cartDispatch) => {
-  //   const response = await updateCartService(id, type, token);
-  //   cartDispatch({ type: "UPDATE_CART", payload: response.data.cart });
-  // };
-
   const updateCartItemClickHandler = (id, type) => {
     updateCartItem(id, type, token, cartDispatch);
   };
-
-  // const getCartBill = (cart) => {
-  //   const cartDetails = cart.reduce(
-  //     (details, cartItem) => {
-  //       return {
-  //         ...details,
-  //         qty: details.qty + cartItem.qty,
-  //         totalAmount:
-  //           details.totalAmount + cartItem.qty * cartItem.discountedPrice,
-  //       };
-  //     },
-  //     { qty: 0, totalAmount: 0 }
-  //   );
-  //   return cartDetails;
-  // };
 
   const { qty, totalAmount } = getCartBill(cart);
 
@@ -92,6 +57,7 @@ const Cart = () => {
                 cardQuantity={cartItem.qty}
                 updateCartItemClickHandler={updateCartItemClickHandler}
                 removeFromCartHandler={removeFromCartHandler}
+                callMoveToWishlistHandler={callMoveToWishlistHandler}
               />
             );
           })}

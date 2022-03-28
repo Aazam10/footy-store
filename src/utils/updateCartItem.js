@@ -9,7 +9,7 @@ const updateCartItem = async (id, type, token, cartDispatch) => {
       throw new Error();
     }
   } catch (error) {
-    alert(error);
+    return error;
   }
 };
 

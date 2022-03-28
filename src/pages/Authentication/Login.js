@@ -6,10 +6,13 @@ import { useState } from "react";
 import { useAuth } from "../../context/data/AuthContext";
 import { getCartItem } from "../../utils/getCartItem";
 import { useCart } from "../../context/data/CartContext";
+import { getWishlistItem } from "../../utils";
+import { useWishlist } from "../../context/data/WishlistContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const { cartDispatch } = useCart();
+  const { wishlistDispatch } = useWishlist();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -46,6 +49,7 @@ const Login = () => {
             },
           });
           getCartItem(response.data.encodedToken, cartDispatch);
+          getWishlistItem(response.data.encodedToken, wishlistDispatch);
           navigate("/");
         } else if (response.status === 201) {
           alert("wrong password");

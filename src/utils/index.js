@@ -6,3 +6,8 @@ export { addToCart } from "./addToCart";
 export { removeFromCart } from "./removeFromCart";
 export { updateCartItem } from "./updateCartItem";
 export { getCartBill } from "./getCartBill";
+export { moveToCart } from "./moveToCart";
+export { moveToWishlist } from "./moveToWishlist";
+export { addToWishlist } from "./addToWishlist";
+export { removeFromWishlist } from "./removeFromWishlist";
+export { getWishlistItem } from "./getWishlistItem";
