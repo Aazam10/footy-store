@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid";
+import { chelseaTee, jordans, nikeImage2, vaporBlack } from "../../assets";
 
 /**
  * Category Database can be added here.
@@ -8,22 +9,26 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "Vapor Shoes",
+    categoryName: "VaporShoes",
     description: "Vapor sneakers",
+    image: vaporBlack,
   },
   {
     _id: uuid(),
-    categoryName: "Football Shoes",
+    categoryName: "FootballShoes",
     description: "Football Shoes",
+    image: nikeImage2,
   },
   {
     _id: uuid(),
-    categoryName: "Club Merch",
+    categoryName: "ClubMerch",
     description: "Club merchandise ",
+    image: chelseaTee,
   },
   {
     _id: uuid(),
-    categoryName: "jordans",
+    categoryName: "Jordans",
     description: "Nike X Jordan collection",
+    image: jordans,
   },
 ];

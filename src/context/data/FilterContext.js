@@ -7,10 +7,11 @@ const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, {
     sortBy: "",
     rangeValue: 5000,
-    jordans: false,
-    vapor: false,
-    footballShoes: false,
-    clubMerch: false,
+    // jordans: false,
+    // vapor: false,
+    // footballShoes: false,
+    // clubMerch: false,
+    category: [],
     ratings: "",
   });
   return (

@@ -3,7 +3,27 @@ import "./Home.css";
 import { nikeImage2, chelseaTee, preMatchTee, jordans } from "../../assets";
 import { ProductCategory } from "./component/ProductCategory";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { useProduct } from "../../context/data/ProductContext";
 const Home = () => {
+  const { categories, setCategories } = useProduct();
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await axios.get("/api/categories");
+        if (response.status === 200) {
+          setCategories(response.data.categories);
+        } else {
+          throw new Error();
+        }
+      } catch (error) {
+        alert(error);
+      }
+    })();
+  }, []);
+  console.log(categories.map((category) => category.categoryName));
   return (
     <main>
       <div className="hero-section">
@@ -23,7 +43,16 @@ const Home = () => {
         <h2 className="featured-title">Featured Categories</h2>
 
         <div className="featured-cards">
-          <ProductCategory
+          {categories.map((category) => {
+            return (
+              <ProductCategory
+                cardImg={category.image}
+                cardAlt={category.categoryName}
+                cardOverlay={category.categoryName}
+              />
+            );
+          })}
+          {/* <ProductCategory
             cardImg={nikeImage2}
             cardAlt={"football-shoes"}
             cardOverlay={"Football Boots"}
@@ -42,7 +71,7 @@ const Home = () => {
             cardImg={jordans}
             cardAlt={"Jordans"}
             cardOverlay={"Jordans"}
-          />
+          /> */}
         </div>
       </div>
     </main>
