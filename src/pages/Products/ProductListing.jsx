@@ -37,8 +37,6 @@ const ProductListing = () => {
     })();
   }, []);
 
-  // console.log(products);
-
   const productCardButtonAction = (id) => {
     const item = cart.find((cartItem) => cartItem._id === id);
     return item ? "Go To Cart" : "Add To Cart";
@@ -62,7 +60,6 @@ const ProductListing = () => {
   const { state } = useFilter();
   const ratingFilteredData = ratingFilter(products, state);
   const categoryFilteredData = categoryFilter(ratingFilteredData, state);
-  console.log(categoryFilteredData);
   const priceFiltered = priceFilter(categoryFilteredData, state);
 
   const sortedData = sortData(priceFiltered, state);
