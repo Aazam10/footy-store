@@ -6,22 +6,31 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { useProduct } from "../../context/data/ProductContext";
+import { useNavigate } from "react-router-dom";
+import { useFilter } from "../../context/data/FilterContext";
 const Home = () => {
   const { categories, setCategories } = useProduct();
+  const navigate = useNavigate();
+  const { state, dispatch } = useFilter();
+  const categoryCardClickHandler = (categoryName) => {
+    dispatch({ type: "CATEGORIES", payload: { category: categoryName } });
+    navigate("/products");
+  };
 
   useEffect(() => {
-    (async function () {
-      try {
-        const response = await axios.get("/api/categories");
-        if (response.status === 200) {
-          setCategories(response.data.categories);
-        } else {
-          throw new Error();
-        }
-      } catch (error) {
-        alert(error);
-      }
-    })();
+    dispatch({ type: "CLEAR" });
+    // (async function () {
+    //   try {
+    //     const response = await axios.get("/api/categories");
+    //     if (response.status === 200) {
+    //       setCategories(response.data.categories);
+    //     } else {
+    //       throw new Error();
+    //     }
+    //   } catch (error) {
+    //     alert(error);
+    //   }
+    // })();
   }, []);
   console.log(categories.map((category) => category.categoryName));
   return (
@@ -46,9 +55,12 @@ const Home = () => {
           {categories.map((category) => {
             return (
               <ProductCategory
+                key={category._id}
+                categoryName={category.categoryName}
                 cardImg={category.image}
                 cardAlt={category.categoryName}
                 cardOverlay={category.categoryName}
+                categoryCardClickHandler={categoryCardClickHandler}
               />
             );
           })}

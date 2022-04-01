@@ -9,19 +9,19 @@ import { chelseaTee, jordans, nikeImage2, vaporBlack } from "../../assets";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "VaporShoes",
+    categoryName: "Vapor Shoes",
     description: "Vapor sneakers",
     image: vaporBlack,
   },
   {
     _id: uuid(),
-    categoryName: "FootballShoes",
+    categoryName: "Football Shoes",
     description: "Football Shoes",
     image: nikeImage2,
   },
   {
     _id: uuid(),
-    categoryName: "ClubMerch",
+    categoryName: "Club Merch",
     description: "Club merchandise ",
     image: chelseaTee,
   },

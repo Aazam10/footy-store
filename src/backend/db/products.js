@@ -21,7 +21,7 @@ export const products = [
     discountedPrice: 750,
     discountPercentage: "25%",
     image: nikeImage2,
-    categoryName: "FootballShoes",
+    categoryName: "Football Shoes",
     ratings: 2.5,
   },
   {
@@ -33,7 +33,7 @@ export const products = [
     discountPercentage: "25%",
     image: chelseaTee,
     price: "5000",
-    categoryName: "ClubMerch",
+    categoryName: "Club Merch",
     ratings: 3,
   },
   {
@@ -45,7 +45,7 @@ export const products = [
     discountPercentage: "25%",
     image: preMatchTee,
     price: "5000",
-    categoryName: "ClubMerch",
+    categoryName: "Club Merch",
     ratings: 3.5,
   },
   {
@@ -69,7 +69,7 @@ export const products = [
     discountPercentage: "25%",
     image: vaporBlack,
     price: "5000",
-    categoryName: "VaporShoes",
+    categoryName: "Vapor Shoes",
     ratings: 1,
   },
 ];

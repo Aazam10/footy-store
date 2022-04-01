@@ -32,10 +32,7 @@ const filterReducer = (state, action) => {
         ...state,
         sortBy: "",
         rangeValue: 5000,
-        jordans: false,
-        vapor: false,
-        footballShoes: false,
-        clubMerch: false,
+        category: [],
         ratings: "",
       };
 

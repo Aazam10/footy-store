@@ -15,14 +15,14 @@ const CategoryFilter = () => {
 
       {categories.map(({ _id, categoryName }) => {
         return (
-          <div className="checkbox">
+          <div className="checkbox" key={_id}>
             <label htmlFor={categoryName}>
               <input
-                id={_id}
+                id={categoryName}
                 type="checkbox"
                 checked={category.includes(categoryName)}
                 // value={"FootballShoes"}
-                onChange={(e) => {
+                onChange={() => {
                   dispatch({
                     type: "CATEGORIES",
                     payload: { category: categoryName },
