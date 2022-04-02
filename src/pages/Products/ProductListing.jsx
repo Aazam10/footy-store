@@ -32,7 +32,7 @@ const ProductListing = () => {
           setProducts(response.data.products);
         }
       } catch (error) {
-        console.log("error while fetching products", error);
+        alert("error while fetching products", error);
       }
     })();
   }, []);
