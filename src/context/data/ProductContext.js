@@ -1,23 +1,30 @@
-import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 const ProductContext = createContext();
+import axios from "axios";
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     (async function () {
       try {
-        const response = await axios.get("/api/products");
+        const response = await axios.get("/api/categories");
         if (response.status === 200) {
-          setProducts(response.data.products);
+          setCategories(response.data.categories);
+        } else {
+          throw new Error();
         }
       } catch (error) {
-        console.log("error while fetching products", error);
+        alert(error);
       }
     })();
   }, []);
+
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider
+      value={{ products, setProducts, categories, setCategories }}
+    >
       {children}
     </ProductContext.Provider>
   );

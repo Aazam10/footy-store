@@ -5,6 +5,8 @@ import { Filters } from "./components/Filters";
 import { useFilter } from "../../context/data/FilterContext";
 import { useCart } from "../../context/data/CartContext";
 import { useAuth } from "../../context/data/AuthContext";
+import { useEffect } from "react";
+import axios from "axios";
 import {
   sortData,
   ratingFilter,
@@ -15,12 +17,25 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const ProductListing = () => {
-  const { products } = useProduct();
+  const { products, setProducts } = useProduct();
   const { cartState, cartDispatch } = useCart();
   const { authState } = useAuth();
   const { cart } = cartState;
   const { token } = authState;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await axios.get("/api/products");
+        if (response.status === 200) {
+          setProducts(response.data.products);
+        }
+      } catch (error) {
+        alert("error while fetching products", error);
+      }
+    })();
+  }, []);
 
   const productCardButtonAction = (id) => {
     const item = cart.find((cartItem) => cartItem._id === id);

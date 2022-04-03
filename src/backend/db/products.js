@@ -57,7 +57,7 @@ export const products = [
     discountPercentage: "25%",
     image: jordans,
     price: "5000",
-    categoryName: "jordans",
+    categoryName: "Jordans",
     ratings: 5,
   },
   {
@@ -69,7 +69,7 @@ export const products = [
     discountPercentage: "25%",
     image: vaporBlack,
     price: "5000",
-    categoryName: "vapor",
-    ratings: 0.5,
+    categoryName: "Vapor Shoes",
+    ratings: 1,
   },
 ];
