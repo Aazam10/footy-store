@@ -5,6 +5,8 @@ import {
   preMatchTee,
   jordans,
   vaporBlack,
+  vaporPro,
+  phantom,
 } from "../../assets";
 
 /**
@@ -71,5 +73,29 @@ export const products = [
     price: "5000",
     categoryName: "Vapor Shoes",
     ratings: 1,
+  },
+  {
+    _id: uuid(),
+    title: "Nike Court Air Zoom Vapor Pro",
+    subtitle: "Marathon Running Shoes",
+    originalPrice: 6000,
+    discountedPrice: 4500,
+    discountPercentage: "25%",
+    image: vaporPro,
+    price: "5000",
+    categoryName: "Vapor Shoes",
+    ratings: 4,
+  },
+  {
+    _id: uuid(),
+    title: "Nike Phantom Elite",
+    subtitle: "Football Shoes",
+    originalPrice: 5500,
+    discountedPrice: 4000,
+    discountPercentage: "25%",
+    image: phantom,
+    price: "5000",
+    categoryName: "Football Shoes",
+    ratings: 3,
   },
 ];

@@ -16,6 +16,7 @@ const ProductCard = ({
   discountPercentage,
   cardButtonActionText,
   cardButtonAction,
+  rating,
 }) => {
   const { products } = useProduct();
   const { authState } = useAuth();
@@ -76,6 +77,9 @@ const ProductCard = ({
         <p className="price">Rs.{discountedPrice}</p>
         <p className="text-strike gray-text">{originalPrice}</p>
         <p className="offer-text">{discountPercentage}</p>
+        <div className="product-rating">
+          {rating} <i class="fas fa-star"></i>
+        </div>
       </div>
       <div className="card-footer">
         <div className="card-button ecom-card-button">

@@ -89,6 +89,7 @@ const ProductListing = () => {
                     originalPrice={product.originalPrice}
                     discountPercentage={product.discountPercentage}
                     discountedPrice={product.discountedPrice}
+                    rating={product.ratings}
                     categoryName={product.categoryName}
                     cardButtonActionText={productCardButtonAction}
                     cardButtonAction={cardButtonAction}

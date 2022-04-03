@@ -22,7 +22,7 @@ const CartBill = ({ quantity, totalPrice }) => {
         <p className="total-amount">Rs.{totalPrice - 300 + 499}</p>
       </div>
       <hr />
-      <p className="saving-desc">You will save Rs. 1999 on this order</p>
+      <p className="saving-desc">You will save Rs. 300 on this order</p>
       <button className="btn cart-btn-primary btn-primary btn-order">
         Place Order
       </button>

@@ -163,6 +163,10 @@ div > h3 {
 .price-title {
   text-align: left;
 }
+
+.product-rating {
+  color: var(--warning-color);
+}
 @media screen and (max-width: 800px) {
   .product-filter-container {
     display: none;
