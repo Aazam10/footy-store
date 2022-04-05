@@ -37,7 +37,7 @@ const WishlistCard = ({
       <div className="wishlist-card-text pd-side-05 margin-y-05 ecom-card-price">
         <p className="price">Rs. {discountedPrice}</p>
         <p className="text-strike gray-text">{originalPrice}</p>
-        <p className="offer-text">{discountPercentage}% off</p>
+        <p className="offer-text">{discountPercentage} off</p>
       </div>
       <div className="card-footer">
         <div className="card-button ecom-card-button">

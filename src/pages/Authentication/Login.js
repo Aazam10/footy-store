@@ -8,11 +8,13 @@ import { getCartItem } from "../../utils/getCartItem";
 import { useCart } from "../../context/data/CartContext";
 import { getWishlistItem } from "../../utils";
 import { useWishlist } from "../../context/data/WishlistContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
   const { cartDispatch } = useCart();
   const { wishlistDispatch } = useWishlist();
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -21,6 +23,10 @@ const Login = () => {
   const guestUser = {
     email: "aazam.hudda@gmail.com",
     password: "aazam123",
+  };
+
+  const showPasswordClickHandler = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const guestCredentialClickHandler = (event) => {
@@ -89,16 +95,24 @@ const Login = () => {
             <label htmlFor="password" className="input-label">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="*********"
-              className="input"
-              value={user.password}
-              name="password"
-              required
-              onChange={loginFieldChangeHandler}
-            />
+            <div className="input-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="*********"
+                className="input"
+                value={user.password}
+                name="password"
+                required
+                onChange={loginFieldChangeHandler}
+              />
+              <div
+                className="password-show-hide-icon"
+                onClick={showPasswordClickHandler}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
+            </div>
           </div>
           <div className="box-link-wrapper">
             <div className="checkbox">
