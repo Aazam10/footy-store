@@ -4,9 +4,12 @@ import { useAuth } from "../../context/data/AuthContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Signup = () => {
   const Navigate = useNavigate();
   const { authDispatch } = useAuth();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const [user, setUser] = useState({
     email: "",
@@ -14,6 +17,10 @@ const Signup = () => {
     firstName: "",
     lastName: "",
   });
+
+  const showPasswordClickHandler = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const signupInputChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -117,16 +124,24 @@ const Signup = () => {
               <label htmlFor="password" className="input-label">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="*********"
-                className="input"
-                name="password"
-                required
-                value={user.password}
-                onChange={signupInputChangeHandler}
-              />
+              <div className="input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="*********"
+                  className="input"
+                  name="password"
+                  required
+                  value={user.password}
+                  onChange={signupInputChangeHandler}
+                />
+                <div
+                  className="password-show-hide-icon"
+                  onClick={showPasswordClickHandler}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
+              </div>
             </div>
             <div className="box-link-wrapper">
               <div className="checkbox">

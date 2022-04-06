@@ -17,10 +17,17 @@
   gap: 5rem;
 }
 
+.cart-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .cart-card-horizontal {
   box-shadow: var(--box-shadow);
   align-items: stretch;
   height: max-content;
+  margin-bottom: 1rem;
 }
 
 .cart-card-horizontal-image {

@@ -43,25 +43,26 @@ const Cart = () => {
       <h2 className="cart-title-main">My CART</h2>
       {cart.length > 0 ? (
         <main className="cart-wrapper">
-          {cart.map((cartItem) => {
-            return (
-              <CartCard
-                key={cartItem._id}
-                cardId={cartItem._id}
-                cardImg={cartItem.image}
-                cardAlt={"card"}
-                cardTitle={cartItem.title}
-                cardDiscountedPrice={cartItem.discountedPrice}
-                cardOriginalPrice={cartItem.originalPrice}
-                cardDiscountedPercentage={cartItem.discountPercentage}
-                cardQuantity={cartItem.qty}
-                updateCartItemClickHandler={updateCartItemClickHandler}
-                removeFromCartHandler={removeFromCartHandler}
-                callMoveToWishlistHandler={callMoveToWishlistHandler}
-              />
-            );
-          })}
-
+          <div className="cart-card-wrapper">
+            {cart.map((cartItem) => {
+              return (
+                <CartCard
+                  key={cartItem._id}
+                  cardId={cartItem._id}
+                  cardImg={cartItem.image}
+                  cardAlt={"card"}
+                  cardTitle={cartItem.title}
+                  cardDiscountedPrice={cartItem.discountedPrice}
+                  cardOriginalPrice={cartItem.originalPrice}
+                  cardDiscountedPercentage={cartItem.discountPercentage}
+                  cardQuantity={cartItem.qty}
+                  updateCartItemClickHandler={updateCartItemClickHandler}
+                  removeFromCartHandler={removeFromCartHandler}
+                  callMoveToWishlistHandler={callMoveToWishlistHandler}
+                />
+              );
+            })}
+          </div>
           <CartBill quantity={qty} totalPrice={totalAmount} />
         </main>
       ) : (

@@ -1,3 +1,20 @@
-## E-Commerce Backend
+# Footy Store
 
-This folder contains the Mock Backend created for E-Commerce App. It contains different API end-points and database configuration for building E-Commerce; so that you can focus on building Frontend.
+Footy Store Ecommerce is an online store for sports lovers to buy items related to sports. It contains shoes, football club kits, and all apparels related to sports.
+
+# **Built with**
+
+- React
+- React Context API + useReducer
+- React Router v6
+- Footy UI
+
+## **Functionalities**
+
+- Product listing page
+- Cart
+- Wishlist
+- Filter and sort products
+- Authentication:
+  - User Signup
+  - User Login
